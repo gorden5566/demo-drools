@@ -1,0 +1,30 @@
+package com.github.gorden5566.drools
+
+import com.github.gorden5566.drools.fact.Order;
+
+// 订单总额不足 49 元, 运费 10 元
+rule "rule_1"
+    when
+        $order : Order(amount < 49)
+    then
+        $order.setFreight(10);
+//        System.out.println("rule_1");
+end
+
+// 订单总额满 49 元且小于 99 元, 运费 5 元
+rule "rule_2"
+    when
+        $order : Order(amount >= 49 && amount < 99)
+    then
+        $order.setFreight(5);
+//        System.out.println("rule_2");
+end
+
+// 订单总额满 99 元, 免运费
+rule "rule_3"
+    when
+        $order : Order(amount >= 99)
+    then
+        $order.setFreight(0);
+//        System.out.println("rule_3");
+end
